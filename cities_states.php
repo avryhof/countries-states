@@ -355,11 +355,11 @@ class Countries_Cities {
       $html  = "<select name='$name' class='$class'>";
       if ($name == "country") {
         foreach($this->countries as $code => $country) {
-          $html .= "<option value='$code' ".($code == $selected ? "selected" :: "").">$country</select>";
+          $html .= "<option value='$code' ".($code == $selected ? "selected" : "").">$country</select>";
         }
       } elseif ($name == "state") {
         foreach($this->states as $code => $state) {
-          $html .= "<option value='$code' ".($code == $selected ? "selected" :: "").">$state</select>";
+          $html .= "<option value='$code' ".($code == $selected ? "selected" : "").">$state</select>";
         }
       }
       $html .= "</select>";
