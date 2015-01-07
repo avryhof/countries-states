@@ -1,0 +1,21 @@
+{
+    "name": "avryhof/countries-states",
+    "description": "PHP Country and State Class",
+    "type": "library",
+    "keywords": ["countries","states","Iso3166"],
+    "homepage": "https://github.com/avryhof/cities-states",
+    "license": "MIT",
+    "authors": [
+        {
+            "email": "amos@vryhofresearch.com",
+            "name": "Amos Vryhof"
+        }
+    ],
+    "require": {
+        "php": ">=5.0.0"
+    },
+    "autoload": {
+        "classmap" : ["cities_states.php"]
+    },
+    "include-path": [""]
+}
