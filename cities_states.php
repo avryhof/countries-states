@@ -314,13 +314,24 @@ class Countries_Cities {
   	);
     
     function map($entity = "country", $code) {
-      switch(strtolower($entity)) {
-        case "country": return $this->countries[$code]; break;
-        case "state": return $this->states[$code]; break;
-      }
+		if (strlen($code) == 2) {
+		  switch(strtolower($entity)) {
+			case "country": return $this->countries[$code]; break;
+			case "state": return $this->states[$code]; break;
+		  }
+		} else {
+		  switch(strtolower($entity)) {
+			case "country": 
+				return array_search($code,$this->countries);
+				break;
+			case "state": 
+				return array_search($code,$this->states);
+				break;
+		  }
+		}
     }
     
-    function json($entity, $include_codes = true, $query = "") {
+    function json($entity = "country", $include_codes = true, $query = "") {
       $query = strtolower($query);
       $retn = array();
       if ($entity == "country") {
@@ -340,7 +351,23 @@ class Countries_Cities {
           }
         }
       } elseif ($entity == "state") {
+		foreach($this->states as $code => $state) {
+          if (!empty($query) && (substr(strtolower($state),0,strlen($query)) == $query)) {
+            if ($include_codes) {
+              $retn[$code] = $state;
+            } else {
+              $retn[] = $state;
+            }
+          } elseif (empty($query)) {
+            if ($include_codes) {
+              $retn[$code] = $state;
+            } else {
+              $retn[] = $state;
+            }
+          }
+        }
       }
+	  return json_encode($retn);
     }
     
     function isValid($code, $entity = false) {
